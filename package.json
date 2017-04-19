@@ -4,6 +4,7 @@
   "description": "MEdia REpository SYnchronization support tools",
   "main": "index.js",
   "dependencies": {
+    "big-integer": "^1.6.20",
     "express": "^4.15.2"
   },
   "devDependencies": {},
