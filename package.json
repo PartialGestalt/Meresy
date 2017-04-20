@@ -2,10 +2,11 @@
   "name": "meresy",
   "version": "0.8.0",
   "description": "MEdia REpository SYnchronization support tools",
-  "main": "index.js",
+  "main": "app.js",
   "dependencies": {
     "big-integer": "^1.6.20",
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "posix-getopt": "^1.2.0"
   },
   "devDependencies": {},
   "scripts": {

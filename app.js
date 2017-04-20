@@ -5,40 +5,22 @@
 'use strict';
 
 /**
- * Application dependencies
- * @private
+ * Choose target based on mode
  */
-var MeresyNumber = require('./lib/MeresyNumber');
-var Httpd = require('./lib/MeresyHttpd');
-var Url = require('url');
+var mod_getopt = require('posix-getopt');
+var parser,option;
+var mode="server";
 
-/**
- * Add a handler for quitting.
- */
-function doExit() {
-    Httpd.stop();
-    process.exit(0);
+// Even though we only want the mode option, we have to validate others./
+parser = new mod_getopt.BasicParser('m:(mode)p:(port)', process.argv);
+
+while ((option = parser.getopt()) !== undefined) {
+	switch (option.option) {
+        case 'm': 
+            mode=option.optarg;
+            break;
+        default: break;
+    }
 }
 
-Httpd.addHandler('get','/quit',function(q,r) {
-   setTimeout(100,doExit()); 
-});
-
-process.on('exit',()=> {
-    console.log("Exiting.");
-});
-
-Httpd.addHandler('get','/numencode', (q,r) => {
-    var input = Url.parse(q.url);
-    console.log("You asked for: " + input.query);
-    r.writeHead(200,{'Content-Type': 'text/plain'});
-    r.write('NumEncode: You asked for ' + input.query + '\n');
-    var encoded = MeresyNumber.encode(input.query)
-    r.write('Encoded to: ' + encoded + '\n');
-    r.end('Decoded back to: ' + MeresyNumber.decode(encoded));
-});
-
-/**
- * Business end of the stick
- */
-Httpd.start(8081);
+console.log('Starting in mode: %s', mode);
