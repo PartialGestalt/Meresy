@@ -1,0 +1,17 @@
+FINGERPRINT
+===========
+
+
+On of the key functions that we need to support is the idea of fingerprinting
+a particular media item, in a way that:
+
+1. Is not dependent on external databases,
+2. is not dependent on storage format
+3. is replicable
+4. is (relatively) fast.
+5. is universally unique enough
+
+Something that is readily apparent is that it is unlikely that any single
+fingerprinting method will suffice.  Therefore, we define the fingerprint
+library interface for seeking or providing multiple mechanisms in a
+storage-agnostic manner.
